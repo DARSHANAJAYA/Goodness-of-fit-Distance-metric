@@ -1,0 +1,7 @@
+*.docx
+*.pdf
+*.pptx
+*.xlsx
+.DS_Store
+.Rdata
+.Rhistory
