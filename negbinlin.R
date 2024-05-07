@@ -37,12 +37,12 @@ my_distance <- function(hnp_obj, f = function(w) 1, g = function(x, alpha = 2, d
 }
 
 # Function to simulate data
-func_sim <- function(n, z, beta_coef = c(3, 2), theta, f = function(w) 1, g = function(x, alpha = 2, delta = 0.2) 1) {
+func_sim <- function(n, z, beta_coef = c(3, 2), sigma, f = function(w) 1, g = function(x, alpha = 2, delta = 0.2) 1) {
   x <- rnorm(n)
   mu <- exp(beta_coef[1] + beta_coef[2] * x)  # Generate mean values
   
   # Simulate data using Negative Binomial II distribution
-  y <- t(replicate(z, rNBII(n, mu = mu, theta)))
+  y <- t(replicate(z, rNBII(n, mu = mu, sigma)))
   
   # Initialize empty lists for storing results
   fit_nb_quad <- fit_nb_lin <- fit_poisson <- fit_quasi <- my_hnp_nb_quad <- my_hnp_nb_lin <- my_hnp_poisson <- my_hnp_quasi <- b_nb_quad <- b_nb_lin <- b_poisson <- b_quasi <- w_nb_quad <- w_nb_lin <- w_poisson <- w_quasi <- aic_neg_lin <- aic_neg_quad <- aic_poisson <- bic_neg_lin <- bic_neg_quad <- bic_poisson <- list()
@@ -178,7 +178,7 @@ func_sim <- function(n, z, beta_coef = c(3, 2), theta, f = function(w) 1, g = fu
 
 # Set seed and run simulation
 set.seed(123)
-my_simulation1 <- func_sim(n = 20, z = 1000, theta = 7)
+my_simulation1 <- func_sim(n = 20, z = 1000, sigma = 7)
 
 # Save the results
 save(my_simulation1, file = "sim_negbinhlin1_new.Rdata")
