@@ -131,19 +131,6 @@ my_distance<-function(hnp_obj) {
   r <-hnp_obj$residuals
   m<-hnp_obj$median
   
-  
-  # --- old code
-  #distance<-sum(((r-m)^2/(f))*(g)^Indicator)
-  
-  # --- new code
-  distance<-sum((r-m)^2)
-  distance_1 <- sum(abs(r-m))
-  
-  my_list<-list(distance,distance_1)
-  
-  return(my_list)
-
-}
 
 
 distance_p_l2 <- distance_nb_l2 <- distance_qp_l2 <- distance_zinb_l2 <- distance_zip_l2 <- distance_nblin_l2 <-  list()
@@ -239,45 +226,6 @@ summary(unlist(distance_l1$distance_zip_l1))
 IQR(unlist(distance_l1$distance_zip_l1))
 sd(unlist(distance_l1$distance_zip_l1))
 
-####################FOR NB lin FROM RAFAEL
-
-
-
-library(mvabund)
-library(gamlss)
-library(hnp)
-
-data(spider)
-
-d <- data.frame(y = spider$abund[,1],
-                x = spider$x$soil.dry)
-
-fit <- glm(y ~ x, family = quasipoisson, data = d)
-hnp(fit, resid.type = "pearson")
-
-fit2 <- gamlss(y ~ x, family = NBII, data = d)
-summary(fit2)
-
-dfun <- function(obj) {
-  r <- obj$y - obj$mu.fv
-  v <- obj$mu.fv * (1 + obj$sigma.fv)
-  rp <- r / sqrt(v)
-  return(rp)
-}
-sfun <- function(n, obj) {
-  y <- rNBII(length(obj$mu.fv), mu = obj$mu.fv, sigma = obj$sigma.fv)
-  return(y)
-}
-ffun <- function(resp) {
-  d$resp <- resp
-  fit <- gamlss(resp ~ x, family = NBII, data = d)
-  return(fit)
-}
-
-hnp(fit2, newclass = TRUE,
-    diagfun = dfun, fitfun = ffun, simfun = sfun)
-
-########TRYING IT SEPERATELY WITH THE CODE 
 
 
 library(mvabund)
