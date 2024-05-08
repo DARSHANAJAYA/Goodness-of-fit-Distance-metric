@@ -7,5 +7,8 @@ The Goodness of fit diagnoistic can divided into following parts:
    For Negative binomial with linear variance for the conditions of mild and strong overdispersion, sigma values are given as 0.5 and 7 respectively.
    For zeroinflation values 0.2 and 0.6 are used for mild and strong zeroinflation and for mild and strong strong overdispersion 0.5 and 7 are used.
 2. Data wrangling
-   Two files are uploaded for data wrangling. datawrangling.R is for models other than the zeroinflated models and for zeroinflated models use datawranglingzeroinfl.R.
    
+datawrangling.R file does the datawrangling to formulate dataframes from the simulations Rdatafiles. For running this files you need to run the simulation accordingly and for L2 norm use j = 1:3 and for L1 norm use j = 46:48. Change file locations accordingly if simulated files are used.Some example files will be included to run the code. change the name of the source files accordingly.
+
+3. Plots
+   The plots.R code will give the final plot results. 
