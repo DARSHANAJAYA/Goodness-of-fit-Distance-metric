@@ -107,7 +107,7 @@ for(j in 1:3) {
   
   #setwd("")
   
-  get_file_poisson <- paste0("sim_zinbom46_", j , "_new.Rdata")
+  get_file_poisson <- paste0("sim_zinbom", j , "_new.Rdata")
   
   get_poisson[[j]]<- get_file(get_file_poisson)
   
