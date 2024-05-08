@@ -105,7 +105,7 @@ get_file <- function(file){
 for(j in 1:3) {
   
   
-  setwd("/Users/darshanaj/Downloads/rstudio-export-9")
+  #setwd("")
   
   get_file_poisson <- paste0("sim_pois", j , "_new.Rdata")
   
