@@ -8,7 +8,7 @@ The Goodness of fit diagnoistic can divided into following parts:
    For zeroinflation values 0.2 and 0.6 are used for mild and strong zeroinflation and for mild and strong strong overdispersion 0.5 and 7 are used.
 2. Data wrangling
    
-datawrangling.R file does the datawrangling to formulate dataframes from the simulations Rdatafiles. For running this files you need to run the simulation accordingly and for L2 norm use j = 1:3 and for L1 norm use j = 46:48. Change file locations accordingly if simulated files are used.Some example files will be included to run the code. change the name of the source files accordingly.
+datawrangling.R file does the datawrangling to formulate dataframes from the simulations Rdatafiles. For running this files you need to run the simulation accordingly and for L2 norm use j = 1:3 and for L1 norm use j = 46:48. Change file locations accordingly if simulated files are used.
 
 3. Plots
    The plots.R code will give the final plot results. 
