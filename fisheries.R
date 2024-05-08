@@ -738,49 +738,6 @@ summary(unlist(distance_l1$distance12_zip_l1))
 IQR(unlist(distance_l1$distance12_zip_l1))
 sd(unlist(distance_l1$distance12_zip_l1))
 
-####TRYING from rafaels code 
-  
-  library(mvabund)
-  library(gamlss)
-  library(hnp)
-  
-  ## reading datasets
-  walleye <- read.csv("walleyePP.csv", stringsAsFactors = TRUE, header = TRUE) %>%
-    mutate(YEAR = as.factor(YEAR))
-  walleye <- walleye %>%
-    mutate(obs = factor(1:nrow(walleye)))
-
-  
-  walleye12 <- walleye %>%
-    filter(YEAR == "2012")
-  walleye12 <- walleye12 %>%
-    mutate(obs = factor(1:nrow(walleye12)))
-  
-  fit <- glm(N ~ AGE, family = quasipoisson, data = walleye12)
-  hnp(fit, resid.type = "pearson")
-  
-  fit2 <- gamlss(N ~ AGE, family = NBII, data = walleye12)
-  summary(fit2)
-  BIC(fit2)
-  dfun <- function(obj) {
-    r <- obj$y - obj$mu.fv
-    v <- obj$mu.fv * (1 + obj$sigma.fv)
-    rp <- r / sqrt(v)
-    return(rp)
-  }
-  sfun <- function(n, obj) {
-    y <- rNBII(length(obj$mu.fv), mu = obj$mu.fv, sigma = obj$sigma.fv)
-    return(y)
-  }
-  ffun <- function(resp) {
-    walleye12$resp <- resp
-    fit <- gamlss(resp ~ AGE, family = NBII, data = walleye12)
-    return(fit)
-  }
-  
-  hnp(fit2, newclass = TRUE,
-      diagfun = dfun, fitfun = ffun, simfun = sfun)
-  
   
   
   ############RUNNING THE SIMULATION SEPERATELY FOR NB LIN 
@@ -851,12 +808,5 @@ sd(unlist(distance_l1$distance12_zip_l1))
     distance_fit2_l1[i] <- my_distance(hnp_fit2)[2]
     
   }
-  
-  ###########exponentiating the ZINB coeffecients 
-  
-  expCoef <- exp(coef((walleye12_zinb)))
-  expCoef <- matrix(expCoef, ncol = 2)
-  rownames(expCoef) <- names(coef(walleye12_zinb))
-  colnames(expCoef) <- c("Count_model","Zero_inflation_model")
-  expCoef
+
 
